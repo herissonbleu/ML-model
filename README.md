@@ -1,2 +1,2 @@
 # ML-model
-Model for predictions
+Example model
