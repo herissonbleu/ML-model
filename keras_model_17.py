@@ -27,13 +27,15 @@ This module is using data from multiple years with missing values filled accordi
 #disable_eager_execution()
 
 df = pd.read_csv(r'path', delimiter=',',keep_default_na=False)
-df.drop(df.index[df['colname'] == None], inplace=True)
-df.drop(df.index[df['colname'] == None],inplace=True)
-df.drop('colname',axis=1,inplace=True)
-df.drop('colname',axis=1,inplace=True)
-df.drop('colname',axis=1,inplace=True)
-df.drop('colname',axis=1,inplace=True)
-df.drop('colname',axis=1,inplace=True)
+
+#Next part is data specific
+#df.drop(df.index[df['colname'] == None], inplace=True)
+#df.drop(df.index[df['colname'] == None],inplace=True)
+#df.drop('colname',axis=1,inplace=True)
+#df.drop('colname',axis=1,inplace=True)
+#df.drop('colname',axis=1,inplace=True)
+#df.drop('colname',axis=1,inplace=True)
+#df.drop('colname',axis=1,inplace=True)
 df['colname'].astype(int)
 
 di = {1:1,2:1,3:0,4:0,5:0}
@@ -113,14 +115,14 @@ all_features = layers.concatenate(
     num2_encoded,num3_encoded,num4_encoded,
     num5_encoded]#num6_encoded
 )
+
 x = layers.Dense(32,activation='elu',bias_initializer='zeros',kernel_initializer='random_normal')(all_features) #kernel_regularizer='l1' #bias_initializer='zeros',kernel_initializer='random_normal'
-#x = layers.Dense(16,activation='elu',bias_initializer='zeros',kernel_initializer='random_normal')(all_features) #kernel_regularizer='l1' #bias_initializer='zeros',kernel_initializer='random_normal'
 x = layers.Dropout(0.2)(x)
 output = layers.Dense(units=1,activation='sigmoid')(x)
 model = keras.Model(all_inputs,output)
 model.compile('adam','binary_crossentropy',metrics=['accuracy'])
 
-#'rankdir='LR' is to make the graph horizontal
+#'rankdir='LR' for horizontal graph
 #keras.utils.plot.model(model,show_shapes=True, rankdir='LR')
 history = model.fit(train_ds,epochs=50,validation_data=val_ds)
 
